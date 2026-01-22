@@ -1,6 +1,5 @@
 package com.oneiros.growapp.db.tables;
 
-import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
