@@ -14,6 +14,14 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        //for room Schema export
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments.putAll(mapOf("room.schemaLocation" to "$projectDir/schemas"))
+            }
+        }
+
     }
 
     buildTypes {

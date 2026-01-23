@@ -1,0 +1,437 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "1df6e7285951af725d886372e09ef135",
+    "entities": [
+      {
+        "tableName": "actions",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`actionId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `actionName` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "actionId",
+            "columnName": "actionId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "actionName",
+            "columnName": "actionName",
+            "affinity": "TEXT"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "actionId"
+          ]
+        }
+      },
+      {
+        "tableName": "plantImages",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`imageId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `plantLogId` INTEGER NOT NULL, `plantId` INTEGER NOT NULL, `imageName` TEXT NOT NULL, `imagePath` TEXT NOT NULL, FOREIGN KEY(`plantLogId`) REFERENCES `plantsLog`(`plantLogId`) ON UPDATE CASCADE ON DELETE NO ACTION , FOREIGN KEY(`plantId`) REFERENCES `plants`(`plantId`) ON UPDATE CASCADE ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "imageId",
+            "columnName": "imageId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "plantLogId",
+            "columnName": "plantLogId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "plantId",
+            "columnName": "plantId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "imageName",
+            "columnName": "imageName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "imagePath",
+            "columnName": "imagePath",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "imageId"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_plantImages_plantLogId",
+            "unique": false,
+            "columnNames": [
+              "plantLogId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_plantImages_plantLogId` ON `${TABLE_NAME}` (`plantLogId`)"
+          },
+          {
+            "name": "index_plantImages_plantId",
+            "unique": false,
+            "columnNames": [
+              "plantId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_plantImages_plantId` ON `${TABLE_NAME}` (`plantId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "plantsLog",
+            "onDelete": "NO ACTION",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "plantLogId"
+            ],
+            "referencedColumns": [
+              "plantLogId"
+            ]
+          },
+          {
+            "table": "plants",
+            "onDelete": "NO ACTION",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "plantId"
+            ],
+            "referencedColumns": [
+              "plantId"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "plantLogActions",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`plantLogActionId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `plantLogId` INTEGER NOT NULL, `actionId` INTEGER NOT NULL, `actionDescription` TEXT, FOREIGN KEY(`plantLogId`) REFERENCES `plantsLog`(`plantLogId`) ON UPDATE CASCADE ON DELETE NO ACTION , FOREIGN KEY(`actionId`) REFERENCES `actions`(`actionId`) ON UPDATE CASCADE ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "plantLogActionId",
+            "columnName": "plantLogActionId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "plantLogId",
+            "columnName": "plantLogId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "actionId",
+            "columnName": "actionId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "actionDescription",
+            "columnName": "actionDescription",
+            "affinity": "TEXT"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "plantLogActionId"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_plantLogActions_plantLogId",
+            "unique": false,
+            "columnNames": [
+              "plantLogId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_plantLogActions_plantLogId` ON `${TABLE_NAME}` (`plantLogId`)"
+          },
+          {
+            "name": "index_plantLogActions_actionId",
+            "unique": false,
+            "columnNames": [
+              "actionId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_plantLogActions_actionId` ON `${TABLE_NAME}` (`actionId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "plantsLog",
+            "onDelete": "NO ACTION",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "plantLogId"
+            ],
+            "referencedColumns": [
+              "plantLogId"
+            ]
+          },
+          {
+            "table": "actions",
+            "onDelete": "NO ACTION",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "actionId"
+            ],
+            "referencedColumns": [
+              "actionId"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "plants",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`plantId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `strain` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "plantId",
+            "columnName": "plantId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "strain",
+            "columnName": "strain",
+            "affinity": "TEXT"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "plantId"
+          ]
+        }
+      },
+      {
+        "tableName": "plantsLog",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`plantLogId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `roomId` INTEGER, `plantId` INTEGER NOT NULL, `timestamp` TEXT, `lightIntensity` INTEGER, `growStage` TEXT, FOREIGN KEY(`roomId`) REFERENCES `rooms`(`roomId`) ON UPDATE CASCADE ON DELETE NO ACTION , FOREIGN KEY(`plantId`) REFERENCES `plants`(`plantId`) ON UPDATE CASCADE ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "plantLogId",
+            "columnName": "plantLogId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "roomId",
+            "columnName": "roomId",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "plantId",
+            "columnName": "plantId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "timestamp",
+            "columnName": "timestamp",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "lightIntensity",
+            "columnName": "lightIntensity",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "growStage",
+            "columnName": "growStage",
+            "affinity": "TEXT"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "plantLogId"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_plantsLog_roomId",
+            "unique": false,
+            "columnNames": [
+              "roomId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_plantsLog_roomId` ON `${TABLE_NAME}` (`roomId`)"
+          },
+          {
+            "name": "index_plantsLog_plantId",
+            "unique": false,
+            "columnNames": [
+              "plantId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_plantsLog_plantId` ON `${TABLE_NAME}` (`plantId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "rooms",
+            "onDelete": "NO ACTION",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "roomId"
+            ],
+            "referencedColumns": [
+              "roomId"
+            ]
+          },
+          {
+            "table": "plants",
+            "onDelete": "NO ACTION",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "plantId"
+            ],
+            "referencedColumns": [
+              "plantId"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "rooms",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`roomId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `indoor` INTEGER NOT NULL DEFAULT 1, `length` INTEGER, `width` INTEGER, `height` INTEGER, `active` INTEGER NOT NULL DEFAULT 1)",
+        "fields": [
+          {
+            "fieldPath": "roomId",
+            "columnName": "roomId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "indoor",
+            "columnName": "indoor",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "1"
+          },
+          {
+            "fieldPath": "length",
+            "columnName": "length",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "width",
+            "columnName": "width",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "height",
+            "columnName": "height",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "active",
+            "columnName": "active",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "1"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "roomId"
+          ]
+        }
+      },
+      {
+        "tableName": "roomsLog",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`roomLogId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `roomId` INTEGER NOT NULL, `lightCycle` INTEGER, `timestamp` TEXT, `temperature` REAL, `humidity` REAL, FOREIGN KEY(`roomId`) REFERENCES `rooms`(`roomId`) ON UPDATE CASCADE ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "roomLogId",
+            "columnName": "roomLogId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "roomId",
+            "columnName": "roomId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lightCycle",
+            "columnName": "lightCycle",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "timestamp",
+            "columnName": "timestamp",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "temperature",
+            "columnName": "temperature",
+            "affinity": "REAL"
+          },
+          {
+            "fieldPath": "humidity",
+            "columnName": "humidity",
+            "affinity": "REAL"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "roomLogId"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_roomsLog_roomId",
+            "unique": false,
+            "columnNames": [
+              "roomId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_roomsLog_roomId` ON `${TABLE_NAME}` (`roomId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "rooms",
+            "onDelete": "NO ACTION",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "roomId"
+            ],
+            "referencedColumns": [
+              "roomId"
+            ]
+          }
+        ]
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '1df6e7285951af725d886372e09ef135')"
+    ]
+  }
+}
