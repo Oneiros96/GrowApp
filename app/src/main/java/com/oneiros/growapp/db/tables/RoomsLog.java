@@ -2,6 +2,7 @@ package com.oneiros.growapp.db.tables;
 
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 
@@ -15,7 +16,9 @@ import java.time.ZonedDateTime;
             parentColumns = "roomId",
             childColumns = "roomId",
             onUpdate = ForeignKey.CASCADE
-    ))
+    ),
+    indices = @Index(value = "roomId")
+)
 public record RoomsLog(
     @PrimaryKey(autoGenerate = true)
     int roomLogId,

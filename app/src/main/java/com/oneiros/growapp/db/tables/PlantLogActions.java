@@ -2,6 +2,7 @@ package com.oneiros.growapp.db.tables;
 
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 @Entity(
@@ -19,6 +20,10 @@ import androidx.room.PrimaryKey;
             childColumns = "actionId",
             onUpdate = ForeignKey.CASCADE
         )
+    },
+    indices = {
+        @Index(value = {"plantLogId"}),
+        @Index(value = {"actionId"})
     }
 )
 public record PlantLogActions(
