@@ -8,6 +8,10 @@ import com.oneiros.growapp.AppConstants;
 import com.oneiros.growapp.db.converters.DateConverters;
 import com.oneiros.growapp.db.tables.*;
 
+/**
+ * This class links {@link androidx.room.Entity} and {@link androidx.room.TypeConverters} to build the db.<br>
+ * The singleton pattern implemented with {@link #getInstance(Context)} prevents multiple instances.
+ */
 @androidx.room.Database(
     entities = {
         Actions.class,
@@ -20,20 +24,16 @@ import com.oneiros.growapp.db.tables.*;
 )
 @TypeConverters({DateConverters.class})
 public abstract class Database extends RoomDatabase {
-    private static volatile Database INSTANCE;
+    private static Database instance;
 
-    public static Database getInstance(final Context context) {
-        if (INSTANCE == null) {
-            synchronized (Database.class) {
-                if (INSTANCE == null) {
-                    INSTANCE = Room.databaseBuilder(
-                        context.getApplicationContext(),
-                        Database.class,
-                        AppConstants.dbName
-                    ).build();
-                }
-            }
+    public static synchronized Database getInstance(Context context) {
+        if (instance == null) {
+            instance = Room.databaseBuilder(
+                context.getApplicationContext(),
+                Database.class,
+                AppConstants.dbName
+            ).build();
         }
-        return INSTANCE;
+        return instance;
     }
 }
