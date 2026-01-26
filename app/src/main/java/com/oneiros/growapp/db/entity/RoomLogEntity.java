@@ -1,4 +1,4 @@
-package com.oneiros.growapp.db.tables;
+package com.oneiros.growapp.db.entity;
 
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
@@ -12,14 +12,14 @@ import java.time.ZonedDateTime;
     tableName = "roomsLog",
     foreignKeys =
         @ForeignKey(
-            entity = Rooms.class,
+            entity = RoomEntity.class,
             parentColumns = "roomId",
             childColumns = "roomId",
             onUpdate = ForeignKey.CASCADE
     ),
     indices = @Index(value = "roomId")
 )
-public record RoomsLog(
+public record RoomLogEntity(
     @PrimaryKey(autoGenerate = true)
     int roomLogId,
     int roomId,

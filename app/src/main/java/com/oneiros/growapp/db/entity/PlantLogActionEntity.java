@@ -1,4 +1,4 @@
-package com.oneiros.growapp.db.tables;
+package com.oneiros.growapp.db.entity;
 
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
@@ -9,13 +9,13 @@ import androidx.room.PrimaryKey;
     tableName = "plantLogActions",
     foreignKeys = {
         @ForeignKey(
-            entity = PlantsLog.class,
+            entity = PlantLogEntity.class,
             parentColumns = "plantLogId",
             childColumns = "plantLogId",
             onUpdate = ForeignKey.CASCADE
         ),
         @ForeignKey(
-            entity = Actions.class,
+            entity = ActionEntity.class,
             parentColumns = "actionId",
             childColumns = "actionId",
             onUpdate = ForeignKey.CASCADE
@@ -26,7 +26,7 @@ import androidx.room.PrimaryKey;
         @Index(value = {"actionId"})
     }
 )
-public record PlantLogActions(
+public record PlantLogActionEntity(
     @PrimaryKey(autoGenerate = true)
     int plantLogActionId,
     int plantLogId,

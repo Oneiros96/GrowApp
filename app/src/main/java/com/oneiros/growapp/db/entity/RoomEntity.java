@@ -1,11 +1,11 @@
-package com.oneiros.growapp.db.tables;
+package com.oneiros.growapp.db.entity;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "rooms")
-public record Rooms(
+public record RoomEntity(
     @PrimaryKey(autoGenerate = true)
     int roomId,
     String name,
