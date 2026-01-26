@@ -6,7 +6,7 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 import com.oneiros.growapp.AppConstants;
 import com.oneiros.growapp.db.converters.DateConverters;
-import com.oneiros.growapp.db.tables.*;
+import com.oneiros.growapp.db.entity.*;
 
 /**
  * This class links {@link androidx.room.Entity} and {@link androidx.room.TypeConverters} to build the db.<br>
@@ -14,12 +14,12 @@ import com.oneiros.growapp.db.tables.*;
  */
 @androidx.room.Database(
     entities = {
-        Actions.class,
-        PlantImages.class,
-        PlantLogActions.class,
-        Plants.class, PlantsLog.class,
-        Rooms.class,
-        RoomsLog.class},
+        ActionEntity.class,
+        PlantImageEntity.class,
+        PlantLogActionEntity.class,
+        PlantEntity.class, PlantLogEntity.class,
+        RoomEntity.class,
+        RoomLogEntity.class},
     version = 1
 )
 @TypeConverters({DateConverters.class})
