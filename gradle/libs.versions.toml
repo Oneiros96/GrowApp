@@ -1,6 +1,5 @@
 [versions]
 # Core Android
-agp = "8.2.0"
 compileSdk = "36"
 targetSdk = "36"
 minSdk = "33"
@@ -11,6 +10,7 @@ material = "1.13.0"
 activity = "1.12.2"
 constraintlayout = "2.2.1"
 room = "2.8.4"
+hilt = "2.51"
 
 # Testing
 junit = "4.13.2"
@@ -33,3 +33,7 @@ androidx-room-testing = { group = "androidx.room", name = "room-testing", versio
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "extJunit" }
 androidx-test-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso" }
+
+# Hilt
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt"}
+hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt"}
