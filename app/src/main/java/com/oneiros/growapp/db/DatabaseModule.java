@@ -1,0 +1,34 @@
+package com.oneiros.growapp.db;
+
+import android.content.Context;
+import com.oneiros.growapp.db.dao.RoomDao;
+import dagger.Module;
+import dagger.Provides;
+import dagger.hilt.InstallIn;
+import dagger.hilt.android.qualifiers.ApplicationContext;
+import dagger.hilt.components.SingletonComponent;
+
+import javax.inject.Singleton;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+@Module
+@InstallIn(SingletonComponent.class)
+public class DatabaseModule {
+    @Provides
+    @Singleton
+    public Database provideDatabase(@ApplicationContext Context context) {
+        return Database.getInstance(context);
+    }
+
+    @Provides
+    public RoomDao provideRoomDao(Database database) {
+        return database.roomDao();
+    }
+
+    @Provides
+    @Singleton
+    public ExecutorService provideExecutorService() {
+        return Executors.newFixedThreadPool(4);
+    }
+}

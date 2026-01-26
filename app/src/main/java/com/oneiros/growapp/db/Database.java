@@ -1,11 +1,14 @@
 package com.oneiros.growapp.db;
 
 import android.content.Context;
+import androidx.room.Dao;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 import com.oneiros.growapp.AppConstants;
 import com.oneiros.growapp.db.converters.DateConverters;
+import com.oneiros.growapp.db.dao.PlantDao;
+import com.oneiros.growapp.db.dao.RoomDao;
 import com.oneiros.growapp.db.entity.*;
 
 /**
@@ -24,6 +27,9 @@ import com.oneiros.growapp.db.entity.*;
 )
 @TypeConverters({DateConverters.class})
 public abstract class Database extends RoomDatabase {
+
+    public abstract RoomDao roomDao();
+    public abstract PlantDao plantDao();
     private static Database instance;
 
     public static synchronized Database getInstance(Context context) {

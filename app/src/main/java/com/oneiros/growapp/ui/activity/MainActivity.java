@@ -1,4 +1,4 @@
-package com.oneiros.growapp;
+package com.oneiros.growapp.ui.activity;
 
 import android.os.Bundle;
 
@@ -7,12 +7,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.ViewModelProvider;
+import com.oneiros.growapp.R;
+import com.oneiros.growapp.ui.viewmodel.RoomViewModel;
+import dagger.hilt.android.AndroidEntryPoint;
 
+@AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
 
+    private RoomViewModel roomviewmodel;
     /**
      * Overrides the parent onCreate Method to: <br>
-     *  - link the activity and its xml <br>
+     *  - link the activity and its XML <br>
      *  - enable Edge-to-Edge drawing of the app (introduced android 10, mandatory since android 15) <br>
      *      ->bevor apps had a "safe box" between the sys bars <br>
      *  - add a listener which adds padding corresponding to the sys bars <br>
@@ -31,5 +37,7 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        roomviewmodel = new ViewModelProvider(this).get(RoomViewModel.class);
     }
 }
