@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "1df6e7285951af725d886372e09ef135",
+    "identityHash": "5c17652c6e50d16a8fe1963ad2b52d40",
     "entities": [
       {
         "tableName": "actions",
@@ -194,13 +194,18 @@
       },
       {
         "tableName": "plants",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`plantId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `strain` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`plantId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `roomId` INTEGER, `name` TEXT, `strain` TEXT, FOREIGN KEY(`roomId`) REFERENCES `rooms`(`roomId`) ON UPDATE CASCADE ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "plantId",
             "columnName": "plantId",
             "affinity": "INTEGER",
             "notNull": true
+          },
+          {
+            "fieldPath": "roomId",
+            "columnName": "roomId",
+            "affinity": "INTEGER"
           },
           {
             "fieldPath": "name",
@@ -218,7 +223,31 @@
           "columnNames": [
             "plantId"
           ]
-        }
+        },
+        "indices": [
+          {
+            "name": "index_plants_roomId",
+            "unique": false,
+            "columnNames": [
+              "roomId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_plants_roomId` ON `${TABLE_NAME}` (`roomId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "rooms",
+            "onDelete": "NO ACTION",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "roomId"
+            ],
+            "referencedColumns": [
+              "roomId"
+            ]
+          }
+        ]
       },
       {
         "tableName": "plantsLog",
@@ -431,7 +460,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '1df6e7285951af725d886372e09ef135')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '5c17652c6e50d16a8fe1963ad2b52d40')"
     ]
   }
 }
