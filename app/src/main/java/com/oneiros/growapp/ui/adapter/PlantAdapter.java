@@ -10,19 +10,19 @@ import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 import com.oneiros.growapp.R;
 import com.oneiros.growapp.db.entity.PlantEntity;
-import org.jetbrains.annotations.NotNull;
+
 
 public class PlantAdapter extends ListAdapter<PlantEntity, PlantAdapter.PlantViewHolder> {
 
     public PlantAdapter() {
         super(new DiffUtil.ItemCallback<PlantEntity>() {
             @Override
-            public boolean areItemsTheSame(@NonNull PlantEntity oldItem, @NotNull PlantEntity newItem) {
+            public boolean areItemsTheSame(@NonNull PlantEntity oldItem, @NonNull PlantEntity newItem) {
                 return oldItem.plantId() == newItem.plantId();
             }
 
             @Override
-            public boolean areContentsTheSame(@NonNull PlantEntity oldItem, @NotNull PlantEntity newItem) {
+            public boolean areContentsTheSame(@NonNull PlantEntity oldItem, @NonNull PlantEntity newItem) {
                 return oldItem.equals(newItem);
             }
         });
