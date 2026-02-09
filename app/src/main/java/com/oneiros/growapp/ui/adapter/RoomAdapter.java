@@ -21,7 +21,7 @@ public class RoomAdapter extends ListAdapter<RoomEntity, RoomAdapter.RoomViewHol
             }
             @Override
             public boolean areContentsTheSame(@NonNull RoomEntity oldItem, @NonNull RoomEntity newItem) {
-                return oldItem.equals(newItem); // Records have perfect equals() built-in!
+                return oldItem.equals(newItem);
             }
         });
     }

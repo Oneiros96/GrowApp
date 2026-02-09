@@ -17,7 +17,7 @@ public class RoomViewModel extends ViewModel {
     private final RoomRepository repository;
     private final LiveData<List<RoomEntity>> allRooms;
 
-    @Inject // Hilt finds the RoomRepository from your DatabaseModule
+    @Inject
     public RoomViewModel(RoomRepository repository) {
         this.repository = repository;
         this.allRooms = repository.getAllRooms();

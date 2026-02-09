@@ -1,9 +1,6 @@
 package com.oneiros.growapp.db.entity;
 
-import androidx.room.Entity;
-import androidx.room.ForeignKey;
-import androidx.room.Index;
-import androidx.room.PrimaryKey;
+import androidx.room.*;
 
 
 @Entity(
@@ -27,4 +24,8 @@ public record PlantEntity(
         String name,
         String strain
 ) {
+    @Ignore
+    public PlantEntity(String name) {
+        this(0, null, name, null);
+    }
 }

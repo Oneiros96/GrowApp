@@ -1,6 +1,7 @@
 package com.oneiros.growapp.db;
 
 import android.content.Context;
+import com.oneiros.growapp.db.dao.PlantDao;
 import com.oneiros.growapp.db.dao.RoomDao;
 import dagger.Module;
 import dagger.Provides;
@@ -25,6 +26,9 @@ public class DatabaseModule {
     public RoomDao provideRoomDao(Database database) {
         return database.roomDao();
     }
+
+    @Provides
+    public PlantDao providePlantDao(Database database){return database.plantDao();}
 
     @Provides
     @Singleton

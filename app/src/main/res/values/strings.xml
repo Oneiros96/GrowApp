@@ -2,4 +2,8 @@
     <string name="app_name">GrowApp</string>
     <string name="add_room">Add Room</string>
     <string name="room_name">Room Name</string>
+    <string name="plant_name">Plant Name</string>
+    <string name="add_plant">Add plant</string>
+    <string name="header_rooms">Rooms</string>
+    <string name="header_plants">Plants</string>
 </resources>

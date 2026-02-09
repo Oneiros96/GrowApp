@@ -12,7 +12,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.oneiros.growapp.R;
+import com.oneiros.growapp.ui.adapter.PlantAdapter;
 import com.oneiros.growapp.ui.adapter.RoomAdapter;
+import com.oneiros.growapp.ui.viewmodel.PlantViewModel;
 import com.oneiros.growapp.ui.viewmodel.RoomViewModel;
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -20,7 +22,9 @@ import dagger.hilt.android.AndroidEntryPoint;
 public class MainActivity extends AppCompatActivity {
 
     private RoomViewModel roomViewModel;
-    private RoomAdapter adapter;
+    private PlantViewModel plantViewModel;
+    private RoomAdapter roomAdapter;
+    private PlantAdapter plantAdapter;
     /**
      * Overrides the parent onCreate Method to: <br>
      *  - link the activity and its XML <br>
@@ -43,17 +47,31 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        //Room stuff
         RecyclerView roomRecyclerView = findViewById(R.id.recyclerViewRooms);
-        adapter = new RoomAdapter();
-        roomRecyclerView.setAdapter(adapter);
+        roomAdapter = new RoomAdapter();
+        roomRecyclerView.setAdapter(roomAdapter);
 
         roomViewModel = new ViewModelProvider(this).get(RoomViewModel.class);
 
         roomViewModel.getAllRooms().observe(this, rooms -> {
-            adapter.submitList(rooms);
+            roomAdapter.submitList(rooms);
         });
 
         findViewById(R.id.fabAddRoom).setOnClickListener(v -> showAddRoomDialog());
+
+        //Plant stuff
+        RecyclerView plantRecyclerView = findViewById(R.id.recyclerViewPlants);
+        plantAdapter = new PlantAdapter();
+        plantRecyclerView.setAdapter(plantAdapter);
+
+        plantViewModel = new ViewModelProvider(this).get(PlantViewModel.class);
+
+        plantViewModel.getPlantsWithoutRoom().observe(this, plants -> {
+            plantAdapter.submitList(plants);
+        });
+
+        findViewById(R.id.fabAddPlant).setOnClickListener((v -> showAddPlantDialog()));
     }
 
     private void showAddRoomDialog() {
@@ -66,6 +84,22 @@ public class MainActivity extends AppCompatActivity {
                 String name = input.getText().toString().trim();
                 if (!name.isEmpty()) {
                     roomViewModel.addRoom(name);
+                }
+            })
+            .setNegativeButton("Cancel", null)
+            .show();
+    }
+
+    private void showAddPlantDialog(){
+        EditText input = new EditText(this);
+        new MaterialAlertDialogBuilder(this)
+            .setTitle("New Plant")
+            .setMessage("Enter the name of the plant")
+            .setView(input)
+            .setPositiveButton("Create", (dialog, which) -> {
+                String name = input.getText().toString().trim();
+                if (!name.isEmpty()) {
+                    plantViewModel.addPlant(name);
                 }
             })
             .setNegativeButton("Cancel", null)
