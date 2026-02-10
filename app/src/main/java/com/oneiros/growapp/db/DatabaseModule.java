@@ -1,6 +1,8 @@
 package com.oneiros.growapp.db;
 
 import android.content.Context;
+import androidx.room.Room;
+import com.oneiros.growapp.AppConstants;
 import com.oneiros.growapp.db.dao.PlantDao;
 import com.oneiros.growapp.db.dao.RoomDao;
 import dagger.Module;
@@ -19,7 +21,11 @@ public class DatabaseModule {
     @Provides
     @Singleton
     public Database provideDatabase(@ApplicationContext Context context) {
-        return Database.getInstance(context);
+        return Room.databaseBuilder(
+            context,
+            Database.class,
+            AppConstants.dbName
+        ).build();
     }
 
     @Provides
