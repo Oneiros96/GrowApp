@@ -21,11 +21,13 @@ public class DatabaseModule {
     @Provides
     @Singleton
     public Database provideDatabase(@ApplicationContext Context context) {
-        return Room.databaseBuilder(
+        return Room.inMemoryDatabaseBuilder(context, Database.class).build();
+
+        /* return Room.databaseBuilder(
             context,
             Database.class,
             AppConstants.dbName
-        ).build();
+        ).build(); */
     }
 
     @Provides
