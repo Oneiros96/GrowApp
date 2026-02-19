@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/nav_graph"
+            app:startDestination="@id/homeFragment">
+
+    <fragment
+            android:id="@+id/homeFragment"
+            android:name="com.oneiros.growapp.ui.fragment.HomeFragment"
+            android:label="Dashboard"
+            tools:layout="@layout/fragment_home">
+
+        <action
+                android:id="@+id/action_home_to_roomList"
+                app:destination="@id/roomListFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"/>
+
+        <action
+                android:id="@+id/action_home_to_roomDetail"
+                app:destination="@id/roomDetailFragment"/>
+
+        <action
+                android:id="@+id/action_home_to_plantList"
+                app:destination="@+id/plantListFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"/>
+
+        <action
+                android:id="@+id/action_home_to_plantDetail"
+                app:destination="@id/plantDetailFragment"/>
+    </fragment>
+
+    <fragment
+            android:id="@+id/roomListFragment"
+            android:name="com.oneiros.growapp.ui.fragment.RoomListFragment"
+            android:label="All Rooms">
+        <action
+                android:id="@+id/action_roomList_to_roomDetail"
+                app:destination="@+id/roomDetailFragment"
+        />
+    </fragment>
+
+    <fragment
+            android:id="@+id/roomDetailFragment"
+            android:name="com.oneiros.growapp.ui.fragment.RoomDetailFragment"
+            android:label="Room Details">
+        <argument
+                android:name="roomId"
+                app:argType="long"/>
+        <action
+                android:id="@+id/action_roomDetail_to_plantDetail"
+                app:destination="@id/plantDetailFragment"/>
+    </fragment>
+
+    <fragment
+            android:id="@+id/addRoomDialogFragment"
+            android:name="com.oneiros.growapp.ui.fragment.AddRoomDialogFragment"
+            android:label="New Room"/>
+
+    <fragment
+            android:id="@+id/addPlantDialogFragment"
+            android:name="com.oneiros.growapp.ui.fragment.AddPlantDialogFragment"
+            android:label="New Plant"/>
+
+    <fragment
+            android:id="@+id/plantListFragment"
+            android:name="com.oneiros.growapp.ui.fragment.PlantListFragment"
+            android:label="Plants without Room">
+        <action
+                android:id="@+id/action_plantList_to_plantDetail"
+                app:destination="@+id/plantDetailFragment"/>
+    </fragment>
+    <fragment
+            android:id="@+id/plantDetailFragment"
+            android:name="com.oneiros.growapp.ui.fragment.PlantDetailFragment"
+            android:label="Plant Details">
+        <argument
+                android:name="plantId"
+                app:argType="long"/>
+    </fragment>
+
+</navigation>
