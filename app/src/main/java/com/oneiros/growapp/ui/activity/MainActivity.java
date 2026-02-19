@@ -2,6 +2,7 @@ package com.oneiros.growapp.ui.activity;
 
 import android.os.Bundle;
 
+import android.util.Log;
 import android.widget.EditText;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,8 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     private RoomViewModel roomViewModel;
     private PlantViewModel plantViewModel;
-    private RoomAdapter roomAdapter;
-    private PlantAdapter plantAdapter;
+
     /**
      * Overrides the parent onCreate Method to: <br>
      *  - link the activity and its XML <br>
@@ -39,41 +39,51 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setupLayout();
+
+        initRoomViewModel();
+        findViewById(R.id.fabAddRoom).setOnClickListener(v -> showAddRoomDialog());
+
+        initPlantViewModel();
+        findViewById(R.id.fabAddPlant).setOnClickListener((v -> showAddPlantDialog()));
+    }
+
+    private void setupLayout(){
         EdgeToEdge.enable(this);
+
         setContentView(R.layout.activity_main);
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
-        //Room stuff
+    }
+    private void initRoomViewModel() {
         RecyclerView roomRecyclerView = findViewById(R.id.recyclerViewRooms);
-        roomAdapter = new RoomAdapter();
+        RoomAdapter roomAdapter = new RoomAdapter();
         roomRecyclerView.setAdapter(roomAdapter);
 
         roomViewModel = new ViewModelProvider(this).get(RoomViewModel.class);
 
         roomViewModel.getAllRooms().observe(this, rooms -> {
             roomAdapter.submitList(rooms);
+            Log.d("MainActivity", "Rooms loaded: " + rooms.size());
         });
-
-        findViewById(R.id.fabAddRoom).setOnClickListener(v -> showAddRoomDialog());
-
-        //Plant stuff
+    }
+    private void initPlantViewModel() {
         RecyclerView plantRecyclerView = findViewById(R.id.recyclerViewPlants);
-        plantAdapter = new PlantAdapter();
+        PlantAdapter plantAdapter = new PlantAdapter();
         plantRecyclerView.setAdapter(plantAdapter);
 
         plantViewModel = new ViewModelProvider(this).get(PlantViewModel.class);
 
         plantViewModel.getPlantsWithoutRoom().observe(this, plants -> {
             plantAdapter.submitList(plants);
+            Log.d("MainActivity", "Plants loaded: " + plants.size());
         });
-
-        findViewById(R.id.fabAddPlant).setOnClickListener((v -> showAddPlantDialog()));
     }
-
     private void showAddRoomDialog() {
         EditText input = new EditText(this);
         new MaterialAlertDialogBuilder(this)
@@ -89,7 +99,6 @@ public class MainActivity extends AppCompatActivity {
             .setNegativeButton("Cancel", null)
             .show();
     }
-
     private void showAddPlantDialog(){
         EditText input = new EditText(this);
         new MaterialAlertDialogBuilder(this)
