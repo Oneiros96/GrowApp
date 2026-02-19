@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorSurface">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+            <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:columnCount="3">
+
+
+                <TextView
+                        android:id="@+id/tvDetailRoomName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                        android:layout_columnWeight="2"
+                        tools:text="Living Room"/>
+
+                <com.google.android.material.chip.Chip
+                        android:id="@+id/chipIndoor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/indoor"
+                        app:chipIcon="@android:drawable/ic_menu_mylocation"/>
+            </GridLayout>
+
+
+            <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:cardBackgroundColor="?attr/colorSurfaceVariant"
+                    app:cardCornerRadius="8dp"
+                    app:strokeWidth="0dp">
+
+                <GridLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:columnCount="3"
+                        android:padding="12dp">
+
+                    <TextView android:text="@string/length" android:layout_columnWeight="1"
+                              android:textAlignment="center"
+                              android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"/>
+                    <TextView android:text="@string/width" android:layout_columnWeight="1"
+                              android:textAlignment="center"
+                              android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"/>
+                    <TextView android:text="@string/height" android:layout_columnWeight="1"
+                              android:textAlignment="center"
+                              android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"/>
+
+                    <TextView android:id="@+id/tvValLen" android:layout_columnWeight="1" android:textAlignment="center"
+                              android:textStyle="bold" tools:text="5m"/>
+                    <TextView android:id="@+id/tvValWid" android:layout_columnWeight="1" android:textAlignment="center"
+                              android:textStyle="bold" tools:text="4m"/>
+                    <TextView android:id="@+id/tvValHei" android:layout_columnWeight="1" android:textAlignment="center"
+                              android:textStyle="bold" tools:text="3m"/>
+                </GridLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvRoomPlants"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:padding="8dp"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

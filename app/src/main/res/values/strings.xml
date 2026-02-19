@@ -6,4 +6,17 @@
     <string name="add_plant">Add plant</string>
     <string name="header_rooms">Rooms</string>
     <string name="header_plants">Plants</string>
+    <string name="create_new_room">Create New Room</string>
+    <string name="room_name_hint">Room Name (e.g. Living Room)</string>
+    <string name="save_room">Save Room</string>
+    <string name="create_new_plant">New Plant</string>
+    <string name="plant_name_hint">plant name (e.g. Daniela)</string>
+    <string name="save_plant">save plant</string>
+    <string name="len_cm">Leng (cm)</string>
+    <string name="wid_cm">Wid (cm)</string>
+    <string name="hei_cm">Hei (cm)</string>
+    <string name="length">Length</string>
+    <string name="width">Width</string>
+    <string name="height">Height</string>
+    <string name="indoor">Indoor</string>
 </resources>

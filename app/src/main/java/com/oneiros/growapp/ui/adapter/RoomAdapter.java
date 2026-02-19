@@ -9,45 +9,65 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 import com.oneiros.growapp.R;
+import com.oneiros.growapp.databinding.ItemRoomBinding;
 import com.oneiros.growapp.db.entity.RoomEntity;
+
+
+import java.util.function.Consumer;
 
 public class RoomAdapter extends ListAdapter<RoomEntity, RoomAdapter.RoomViewHolder> {
 
-    public RoomAdapter() {
+    private final Consumer<RoomEntity> onRoomClickListener;
+
+    public RoomAdapter(Consumer<RoomEntity> listener) {
         super(new DiffUtil.ItemCallback<RoomEntity>() {
             @Override
             public boolean areItemsTheSame(@NonNull RoomEntity oldItem, @NonNull RoomEntity newItem) {
+                // Using record style accessors if RoomEntity is a record, or .getRoomId()
                 return oldItem.roomId() == newItem.roomId();
             }
+
             @Override
             public boolean areContentsTheSame(@NonNull RoomEntity oldItem, @NonNull RoomEntity newItem) {
                 return oldItem.equals(newItem);
             }
         });
+        this.onRoomClickListener = listener;
     }
 
     @NonNull
     @Override
     public RoomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_room, parent, false);
-        return new RoomViewHolder(view);
+        ItemRoomBinding binding = ItemRoomBinding.inflate(
+            LayoutInflater.from(parent.getContext()), parent, false);
+        return new RoomViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RoomViewHolder holder, int position) {
-        holder.bind(getItem(position));
+        RoomEntity room = getItem(position);
+        holder.bind(room, onRoomClickListener);
     }
 
     public static class RoomViewHolder extends RecyclerView.ViewHolder {
-        private final TextView nameTextView;
+        private final ItemRoomBinding binding;
 
-        public RoomViewHolder(@NonNull View itemView) {
-            super(itemView);
-            nameTextView = itemView.findViewById(R.id.textViewRoomName);
+        public RoomViewHolder(@NonNull ItemRoomBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
 
-        public void bind(RoomEntity room) {
-            nameTextView.setText(room.name());
+        public void bind(RoomEntity room, Consumer<RoomEntity> listener) {
+            binding.tvRoomsHeader.setText(room.name());
+
+            // Set unique transition name for the expanding animation
+            binding.getRoot().setTransitionName("room_card_" + room.roomId());
+
+            binding.getRoot().setOnClickListener(v -> {
+                if (listener != null) {
+                    listener.accept(room);
+                }
+            });
         }
     }
 }

@@ -27,4 +27,8 @@ public class RoomRepository {
     public void insertRoom(RoomEntity room) {
         executor.execute(() -> roomDao.insert(room));
     }
+
+    public LiveData<RoomEntity> getRoomById(int id) {
+        return roomDao.getRoomById(id);
+    }
 }

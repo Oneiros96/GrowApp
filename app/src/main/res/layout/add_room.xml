@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/create_new_room"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+            android:layout_marginBottom="16dp"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilRoomName"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/room_name_hint"
+            android:layout_marginBottom="16dp"
+            app:endIconMode="clear_text">
+
+        <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etRoomName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textCapWords"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:baselineAligned="false"
+            android:layout_marginBottom="16dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilLength"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="4dp"
+                android:hint="@string/len_cm">
+            <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etLength"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilWidth"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="4dp"
+                android:hint="@string/wid_cm">
+            <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etWidth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilHeight"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="4dp"
+                android:hint="@string/hei_cm">
+            <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etHeight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"/>
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/cbIndoor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Indoor Room"
+            android:checked="true"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"/>
+
+    <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSaveRoom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/save_room"
+            android:padding="12dp"/>
+
+</LinearLayout>

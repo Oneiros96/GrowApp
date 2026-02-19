@@ -11,6 +11,8 @@ import java.util.List;
 
 @Dao
 public interface RoomDao {
+    @Query("SELECT * FROM rooms WHERE roomId = :roomId")
+    LiveData<RoomEntity> getRoomById(int roomId);
     @Query("SELECT * FROM rooms ORDER BY name ASC")
     LiveData<List<RoomEntity>> getAllRooms();
 

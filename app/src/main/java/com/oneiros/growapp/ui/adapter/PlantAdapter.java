@@ -1,23 +1,25 @@
 package com.oneiros.growapp.ui.adapter;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
-import com.oneiros.growapp.R;
 import com.oneiros.growapp.db.entity.PlantEntity;
+import com.oneiros.growapp.databinding.ItemPlantBinding;
 
+import java.util.function.Consumer;
 
 public class PlantAdapter extends ListAdapter<PlantEntity, PlantAdapter.PlantViewHolder> {
 
-    public PlantAdapter() {
+    private final Consumer<PlantEntity> onPlantClickListener;
+
+    public PlantAdapter(Consumer<PlantEntity> listener) {
         super(new DiffUtil.ItemCallback<PlantEntity>() {
             @Override
             public boolean areItemsTheSame(@NonNull PlantEntity oldItem, @NonNull PlantEntity newItem) {
+                // Assuming plantId() is your accessor (Record style)
                 return oldItem.plantId() == newItem.plantId();
             }
 
@@ -26,26 +28,41 @@ public class PlantAdapter extends ListAdapter<PlantEntity, PlantAdapter.PlantVie
                 return oldItem.equals(newItem);
             }
         });
+        this.onPlantClickListener = listener;
     }
 
     @NonNull
     @Override
-    public PlantViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_plant, parent, false);
-        return new PlantViewHolder(view);
+    public PlantViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        ItemPlantBinding binding = ItemPlantBinding.inflate(
+            LayoutInflater.from(parent.getContext()), parent, false);
+        return new PlantViewHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PlantViewHolder holder, int position) { holder.bind(getItem(position));}
+    public void onBindViewHolder(@NonNull PlantViewHolder holder, int position) {
+        holder.bind(getItem(position), onPlantClickListener);
+    }
 
     public static class PlantViewHolder extends RecyclerView.ViewHolder {
-        private final TextView nameTextView;
+        private final ItemPlantBinding binding;
 
-        public PlantViewHolder(@NonNull View itemView){
-            super(itemView);
-            nameTextView = itemView.findViewById(R.id.textViewPlantName);
+        public PlantViewHolder(@NonNull ItemPlantBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
 
-        public void bind(PlantEntity plant){nameTextView.setText(plant.name());}
+        public void bind(PlantEntity plant, Consumer<PlantEntity> listener) {
+            binding.tvPlantsHeader.setText(plant.name());
+
+            // Prepare for Material Container Transform (Expansion)
+            binding.getRoot().setTransitionName("plant_card_" + plant.plantId());
+
+            binding.getRoot().setOnClickListener(v -> {
+                if (listener != null) {
+                    listener.accept(plant);
+                }
+            });
+        }
     }
 }
