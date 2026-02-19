@@ -62,9 +62,9 @@ public class RoomDetailFragment extends Fragment {
         viewModel.getRoomById(roomId).observe(getViewLifecycleOwner(), room -> {
             if (room != null) {
                 binding.tvDetailRoomName.setText(room.name());
-                binding.tvValLen.setText(room.length() + "m");
-                binding.tvValWid.setText(room.width() + "m");
-                binding.tvValHei.setText(room.height() + "m");
+                binding.tvValLen.setText(room.length() + "cm");
+                binding.tvValWid.setText(room.width() + "cm");
+                binding.tvValHei.setText(room.height() + "cm");
                 binding.chipIndoor.setVisibility(room.indoor() ? View.VISIBLE : View.GONE);
             }
         });
