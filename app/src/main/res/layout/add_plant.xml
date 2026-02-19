@@ -10,7 +10,7 @@
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/create_new_plant"
+            android:text="@string/add_plant"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
             android:layout_marginBottom="16dp" />
 
@@ -20,8 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/plant_name_hint"
-            app:endIconMode="clear_text">
-
+            android:layout_marginBottom="12dp">
         <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etPlantName"
                 android:layout_width="match_parent"
@@ -29,11 +28,38 @@
                 android:inputType="textCapWords" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilStrainName"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/strain_species_optional"
+            android:layout_marginBottom="12dp">
+        <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etStrainName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textCapWords" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilRoomDropdown"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/assign_to_room_optional"
+            android:layout_marginBottom="24dp">
+        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/autoCompleteRoom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none" />
+    </com.google.android.material.textfield.TextInputLayout>
+
     <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSavePlant"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
             android:text="@string/save_plant"
             android:padding="12dp" />
 
